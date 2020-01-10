@@ -1,0 +1,23 @@
+// Copyright 2019 Google LLC.
+// SPDX-License-Identifier: Apache-2.0
+
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+
+package perfetto.protos;
+
+import "protos/perfetto/metrics/metrics.proto";
+
+message ProcessInfo {
+  optional string process_name = 1;
+  optional int64 cpu_time_ms = 2;
+  optional uint32 num_threads = 3;
+}
+
+message TopFiveProcesses {
+  repeated ProcessInfo process_info = 1;
+}
+
+extend TraceMetrics {
+  optional TopFiveProcesses top_five_processes = 450;
+}
